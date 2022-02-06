@@ -1,7 +1,3 @@
-from crypt import methods
-from email import message
-
-from click import password_option
 from app import app
 from flask import redirect, render_template, request
 import users
@@ -32,7 +28,6 @@ def logout():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
-        print("kokeillaan mennä kirjautumissivulle")
         return render_template("login.html")
     if request.method == "POST":
         username = request.form["username"]
