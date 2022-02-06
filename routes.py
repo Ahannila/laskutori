@@ -1,4 +1,7 @@
+from crypt import methods
 from email import message
+
+from click import password_option
 from app import app
 from flask import redirect, render_template, request
 import users
@@ -19,4 +22,22 @@ def register():
         if users.register(username, password):
             return redirect("/")
         else: 
+            return render_template("error.html")
+
+@app.route("/logout")
+def logout():
+    users.logout()
+    return redirect("/")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "GET":
+        print("kokeillaan mennä kirjautumissivulle")
+        return render_template("login.html")
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        if users.login(username, password):
+            return redirect("/")
+        else:
             return render_template("error.html")

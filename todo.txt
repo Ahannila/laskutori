@@ -1,0 +1,8 @@
+-Mahdollisuus kirjautua ja että se onnistuu [X]
+-login []
+	-
+	-Nappula lisää julkaisu []
+-logout[]
+
+-Julkaisun tallentaminen tietokantaan []
+	
