@@ -17,8 +17,6 @@ Sovelluksella on tarkoitus katsoa, lisätä ja muokata ilmoituksia, jotka liitty
 
 - Mahdollisuus tarkastella tehtyjä käyttäjiä sekä poistaa/estää niitä jos tarpeen on.
 
-## Käyttöliittymäluonnos
-TO-DO
 
 ## Ohjelmiston tarjoamat toiminnallisuudet
 
@@ -30,3 +28,6 @@ Ilmoituksen tekeminen:
 Saat ohjelmiston kirjastot ladattua kun pip install -r requirements.txt
 
 
+## TODO
+Tällä hetkellä ohjelman kirjautuminen toimii vain flaskissa, en ole saanut herokua toiminaan.
+Lisättäviä tauluja tulee olemaan käyttäjän suosikit, kommentit, kategoriat ja kuvat. Toiminnallisuutta ilmoituksen tekemiseen en ole vielä ehtinyt tehdä.
