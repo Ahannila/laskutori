@@ -4,17 +4,16 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 def register(username, password):
     hash_value = generate_password_hash(password)
-    try:
-        print("Kokeillaan rekisteröidä")
-        sql = "INSERT INTO users (username,password) VALUES (:username, :password);"
-        db.session.execute(sql, {"username":username, "password":hash_value})
-        db.session.commit()
-    except:
-        return False
+
+    print("Kokeillaan rekisteröidä")
+    sql = "INSERT INTO users (username,password) VALUES (:username, :password)"
+    db.session.execute(sql, {"username":username, "password":hash_value})
+    db.session.commit()
+
     return login(username, password)
 
 def login(username, password):
-    sql = "SELECT id, password FROM users WHERE username=:username;"
+    sql = "SELECT id, password FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
     if not user:
