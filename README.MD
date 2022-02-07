@@ -29,5 +29,5 @@ Saat ohjelmiston kirjastot ladattua kun pip install -r requirements.txt
 
 
 ## TODO
-Tällä hetkellä ohjelman kirjautuminen toimii vain flaskissa, en ole saanut herokua toiminaan.
-Lisättäviä tauluja tulee olemaan käyttäjän suosikit, kommentit, kategoriat ja kuvat. Toiminnallisuutta ilmoituksen tekemiseen en ole vielä ehtinyt tehdä.
+Sain sovelluksen toimimaan juuri herokussa vaihtamalla aiempaan sqlalchemyn versioon. 
+Lisättäviä tauluja tulee olemaan käyttäjän suosikit, kommentit, kategoriat ja kuvat. Toiminnallisuutta ilmoituksen tekemiseen en ole vielä ehtinyt tekemään.
