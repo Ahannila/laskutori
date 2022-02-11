@@ -7,9 +7,11 @@ CREATE TABLE Users (
 CREATE TABLE Post (
     id SERIAL PRIMARY KEY,
     content TEXT,
+    price INTEGER,
     creator_id INTEGER REFERENCES Users,
     sent_at TIMESTAMP,
-    visible INTEGER
+    visible INTEGER,
+    title TEXT
 );
 
 CREATE TABLE Comments (
@@ -34,5 +36,12 @@ CREATE TABLE photos (
     kuvat TEXT
 );
 
+CREATE TABLE Favourites(
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER REFERENCES users,
+    post_id INTEGER REFERENCES post
+);
+
 
     --taulukkoja ovat USERS, ADMINS, POSTS, FAVORITES, CATEGORIES, COMMENTS, PICTURES
+    --Post taulukkoon pitää lisätä hinta!!!!!!!!!!!

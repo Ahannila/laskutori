@@ -1,10 +1,19 @@
+from calendar import c
+from crypt import methods
 from app import app
-from flask import redirect, render_template, request
+from flask import redirect, render_template, request, session
 import users
+import posts
+import favourites
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
-    return render_template("index.html")
+    if request.method == "POST":
+        post_id = request.form("post_id")
+        if favourites.add_favourite(post_id):
+            return redirect("/")
+    all_posts = posts.list_posts()
+    return render_template("index.html", posts=all_posts)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -36,3 +45,22 @@ def login():
             return redirect("/")
         else:
             return render_template("error.html")
+
+@app.route("/newpost", methods=["GET", "POST"])
+def newpost():
+    if request.method == "GET":
+        return render_template("newpost.html")
+    if request.method == "POST":
+        title = request.form["title"]
+        content = request.form["content"]
+        price = request.form["price"]
+        if posts.add_post(title,content,price):
+            return redirect("/")
+        else: 
+            return render_template("error.html")
+
+@app.route("/favourite", methods=["GET", "POST"])
+def favourite():
+    if request.method == "GET":
+        return render_template("/favourite.html")
+    

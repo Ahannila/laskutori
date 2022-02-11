@@ -31,3 +31,10 @@ Saat ohjelmiston kirjastot ladattua kun pip install -r requirements.txt
 ## TODO
 Sain sovelluksen toimimaan juuri herokussa vaihtamalla aiempaan sqlalchemyn versioon. 
 Lisättäviä tauluja tulee olemaan käyttäjän suosikit, kommentit, kategoriat ja kuvat. Toiminnallisuutta ilmoituksen tekemiseen en ole vielä ehtinyt tekemään.
+
+
+- Login screen errorit testaus []
+- Register screenin siistiksi teko ja testaus erroreitten varalta []
+- ilmoituksen karkea lisäys []
+- ilmoitusten karkea printtaus indexiin []
+

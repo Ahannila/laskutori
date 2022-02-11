@@ -1,8 +1,15 @@
 -Mahdollisuus kirjautua ja että se onnistuu [X]
--login []
+-login [X]
 	-
-	-Nappula lisää julkaisu []
--logout[]
+	-Nappula lisää julkaisu [X]
+-logout[X]
 
--Julkaisun tallentaminen tietokantaan []
+-Julkaisun tallentaminen tietokantaan [X]
 	
+- Ilmoitusta tehdessä lisätään kaikki ilmoituksen vaatimat tiedot eli
+	title, hinta, visible ja content muutetaan. [X]
+
+-Ilmoitukset vierekkäin []
+
+suosikit sivu []
+suosikiksi lisääminen []
