@@ -1,0 +1,29 @@
+{% extends "layout.html"%}
+{% block content %}
+Täällä ovat suosikkisi
+{% for fave in favourites %}
+
+<div class="row row-cols-2 row-cols-2">  
+    <div class="col mb-4">
+      <div class="card ">
+        <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{fave[0]}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted text-truncate"><i>Ilmoittaja:  </i>{{fave[2]}}</h6>
+          <p class="card-text text-truncate">{{fave[1]}}</p>
+          <a href="#" class="card-link">Avaa isommaksi</a>
+
+          <form action="/favourite" method="POST">
+            <input type="hidden" name="post" value={{fave[0]}}>
+            <input type="submit" value="Lisää suosikiksi">
+        </form>
+        
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">{{fave[0]}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

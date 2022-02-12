@@ -6,12 +6,8 @@ import users
 import posts
 import favourites
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/")
 def index():
-    if request.method == "POST":
-        post_id = request.form("post_id")
-        if favourites.add_favourite(post_id):
-            return redirect("/")
     all_posts = posts.list_posts()
     return render_template("index.html", posts=all_posts)
 
@@ -62,5 +58,10 @@ def newpost():
 @app.route("/favourite", methods=["GET", "POST"])
 def favourite():
     if request.method == "GET":
-        return render_template("/favourite.html")
-    
+        faves=favourites.show_favourites()
+      
+        return render_template("favourite.html", favourites=faves)
+    if request.method == "POST":
+        post = request.form["post"]
+        if favourites.add_favourite(post):
+            return redirect("/")

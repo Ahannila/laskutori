@@ -31,13 +31,13 @@ CREATE TABLE Admins(
     
 
 CREATE TABLE photos (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users,
     kuvat TEXT
 );
 
 CREATE TABLE Favourites(
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users,
     post_id INTEGER REFERENCES post
 );

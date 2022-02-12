@@ -5,28 +5,39 @@
 <title>Laskutori</title>
 </head>
 
+
 <div class="container">
-  <nav class="navbar navbar-expand-sm navbar-light">
-    <a class="navbar-brand" href="#">Laskutori</a>
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Kategoriat</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Suosikit</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Kommentit</a>
-      </li>
-    </ul>
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">Laskutori</a>
+  
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Omat julkaisut <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Kategoriat</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/favourite">Suosikit</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
   </nav>
   <div class="row">
     <div class="col-8">
-      <h1>Tervetuloa laskutoriin!</h1>
         {% if session.user_id %}
-        Olet kirjautunut sisään.
         <a href="/logout"><button type="submit" class="btn btn-primary">Kirjaudu ulos</button></a>
         <a href="/newpost"><button type="submit" class="btn btn-primary">Jätä ilmoitus</button></a>
+        Olet kirjautunut sisään.
         {% else %}
       </div>
       <div class="col-6">
@@ -35,28 +46,49 @@
     </div>
     </div>
     {% endif %}
-
-        {% for post in posts%}
-    <div class="row row-cols-2 row-cols-2">  
-      <div class="col mb-4">
-        <div class="card ">
+    
+       
+    <div class="row row-cols-1 row-cols-md-3"> 
+      {% for post in posts%} 
+      <div class="col mb-4 ">
+        <div class="card">
           <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{post[0]}}</h5>
             <h6 class="card-subtitle mb-2 text-muted text-truncate"><i>Ilmoittaja:  </i>{{post[2]}}</h6>
             <p class="card-text text-truncate">{{post[1]}}</p>
             <a href="#" class="card-link">Avaa isommaksi</a>
-            <form action="" method="POST">
-            <a href="/favourite" class="card-link">Lisää suosikkeihin</a>
+
+            <form action="/favourite" method="POST">
+              <input type="hidden" name="post" value={{post[5]}}>
+              <input type="submit" value="Lisää suosikiksi">
           </form>
+          
           </div>
           <div class="card-footer">
             <small class="text-muted">{{post[3].strftime("%Y-%m-%d %H:%M:%S") }}</small>
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
+
 </div>
 
+
+<!--
+<div class="row row-cols-1 row-cols-md-3">
+  {% for post in posts%}
+  <div class="col mb-4">
+    <div class="card">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{post[0]}}</h5>
+        <p class="card-text text-truncate">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+-->
 

@@ -6,7 +6,7 @@ from flask import session
 
 def add_favourite(post_id):
     user_id = session["user_id"]
-    if user_id == 0:
+    if user_id == 0 or already_favourite(post_id):
         return False
     sql = "INSERT INTO favourites (user_id, post_id) VALUES (:user_id, :post_id)"
     db.session.execute(sql, {"user_id":user_id, "post_id":post_id})
@@ -17,5 +17,12 @@ def show_favourites():
     user_id = session["user_id"]
     if user_id == 0:
         return False
-    sql = "SELECT P.title, P.content, U.username, P.sent_at, P.price FROM Post P, users U, Favourites F WHERE F.user_id=(:user_id) ORDER BY P.sent_at"
-    db.session.execute(sql, {"user_id":user_id})
+    sql = "SELECT P.title, P.content, F.post_id FROM Post P, Favourites F WHERE F.user_id=(:user_id) AND P.id=F.post_id ;"
+    result = db.session.execute(sql, {"user_id":user_id})
+    return result.fetchall()
+
+def already_favourite():
+    user_id = session["user_id"]
+    if user_id == 0:
+        return False
+    pass
