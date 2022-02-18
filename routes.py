@@ -65,3 +65,16 @@ def favourite():
         post = request.form["post"]
         if favourites.add_favourite(post):
             return redirect("/")
+
+@app.route("/post", methods=["POST"])
+def post():
+    if request.method == "POST":
+        id = request.form["id"]
+        post = posts.get_post_by_id(id)
+        return render_template("post.html", posts=post)
+
+@app.route("/comment", methods=["GET", "POST"])
+def comment():
+    pass
+    if request.method == "POST":
+        pass
