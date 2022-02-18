@@ -11,5 +11,17 @@
 
 -Ilmoitukset vierekkäin []
 
-suosikit sivu []
-suosikiksi lisääminen []
+suosikit sivu [X]
+suosikiksi lisääminen [X]
+Suosikeista poisto []
+Ei voi lisätä jos on jo suosikeissa []
+
+Hakutoiminto []
+
+Mahdollisuus avata julkaisu []
+
+Mahdollisuus lisätä kuva []
+
+Mahdollisuus kommentoida []
+
+

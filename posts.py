@@ -18,5 +18,11 @@ def list_posts():
     result = db.session.execute(sql)
     return result.fetchall()   
 
+def get_post_by_id(id):
+    sql = "SELECT P.title, P.content FROM Post P WHERE P.id=(:id);"
+    result = db.session.execute(sql,{"id":id})
+    return result.fetchall()
+
 def remove_post():
     sql = "DELETE FROM post WHERE creator_id VALUES (:creator_id)"
+

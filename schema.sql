@@ -11,7 +11,8 @@ CREATE TABLE Post (
     creator_id INTEGER REFERENCES Users,
     sent_at TIMESTAMP,
     visible INTEGER,
-    title TEXT
+    title TEXT,
+    category TEXT REFERENCES Category
 );
 
 CREATE TABLE Comments (
@@ -41,6 +42,12 @@ CREATE TABLE Favourites(
     user_id INTEGER REFERENCES users,
     post_id INTEGER REFERENCES post
 );
+
+CREATE TABLE Category(
+    id SERIAL PRIMARY KEY,
+    category TEXT,
+    post_id INTEGER REFERENCES post
+    );
 
 
     --taulukkoja ovat USERS, ADMINS, POSTS, FAVORITES, CATEGORIES, COMMENTS, PICTURES
