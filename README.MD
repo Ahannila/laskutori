@@ -1,3 +1,6 @@
+### Laskutori
+https://laskutori.herokuapp.com/
+
 
 ## Sovelluksen tarkoitus
 Sovelluksella on tarkoitus katsoa, lisätä ja muokata ilmoituksia, jotka liittyvät lasketteluvälineisiin. Sivusto toimii vähän kuin nettiauto tai tori. Käyttäjiä on kaksi, normaali käyttäjä ja ylläpitäjä
