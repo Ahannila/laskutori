@@ -1,10 +1,10 @@
-from calendar import c
-from crypt import methods
 from app import app
 from flask import redirect, render_template, request, session
 import users
 import posts
 import favourites
+import search
+import comment
 
 @app.route("/")
 def index():
@@ -40,7 +40,7 @@ def login():
         if users.login(username, password):
             return redirect("/")
         else:
-            return render_template("error.html")
+            return render_template("login.html", message="Salasana tai käyttäjätunnus väärin")
 
 @app.route("/newpost", methods=["GET", "POST"])
 def newpost():
@@ -48,33 +48,80 @@ def newpost():
         return render_template("newpost.html")
     if request.method == "POST":
         title = request.form["title"]
+        if len(title) > 20:
+            return render_template("newpost.html", message="Otsikko on liian pitkä")
+            
         content = request.form["content"]
+        if len(content) > 300:
+            return render_template("newpost.html", message="Liian pitkä sisältö")
+
         price = request.form["price"]
-        if posts.add_post(title,content,price):
+        if len(price) > 6:
+            return render_template("newpost.html", message="Hinta liian suuri")
+        if price == None:
+            return render_template("newpost.html", message="Hinta on tyhjä.")
+
+        category = request.form["inputGroupSelect01"]
+        if category == "Valitse...":
+            return render_template("newpost.html", message="Valitse kategoria")
+
+        if posts.add_post(title,content,price,category):
             return redirect("/")
         else: 
             return render_template("error.html")
 
 @app.route("/favourite", methods=["GET", "POST"])
 def favourite():
+
+
     if request.method == "GET":
-        faves=favourites.show_favourites()
-      
-        return render_template("favourite.html", favourites=faves)
+        try:
+            faves=favourites.show_favourites()
+            return render_template("favourite.html", favourites=faves)
+        except:
+            return render_template("error.html", error="Kirjaudu sisään nähdäksesi suosikkisi")
     if request.method == "POST":
         post = request.form["post"]
         if favourites.add_favourite(post):
             return redirect("/")
+        else:
+            return render_template("error.html", error="Kohde on jo suosikeissasi")
 
 @app.route("/post", methods=["POST"])
 def post():
     if request.method == "POST":
         id = request.form["id"]
         post = posts.get_post_by_id(id)
-        return render_template("post.html", posts=post)
+        comments = comment.get_comments(id)
+        return render_template("post.html", posts=post, comment=comments)
 
 @app.route("/comment", methods=["GET", "POST"])
-def comment():
-    pass
+def comments():
     if request.method == "POST":
-        pass
+        post_id = request.form["id"]
+        content = request.form["comment"]
+        try: 
+            comment.add_comment(post_id,content)
+            return render_template("post.html", message="Kommenttisi on nyt julkaistu")
+        except: 
+            return render_template("error.html", error="tapahtui kommentoitaessa, oletko kirjautunut sisään?")
+
+
+@app.route("/categories", methods=["GET", "POST"])
+def categories():
+    return render_template("categories.html")
+
+@app.route("/search")
+def query():
+        query = request.form["search"]
+        result = search.query_results(query)
+        print(result)
+        return render_template("search.html", result=result)
+
+@app.route("/userlistings")
+def user_listings():
+    try:
+        users_posts = posts.get_post_by_creator_id()
+        return render_template("userlistings.html", posts=users_posts)
+    except:
+        return render_template("error.html", error="Kirjaudu sisään nähdäksesi julkaisusi")

@@ -12,7 +12,7 @@ CREATE TABLE Post (
     sent_at TIMESTAMP,
     visible INTEGER,
     title TEXT,
-    category TEXT REFERENCES Category
+    category_id INTEGER
 );
 
 CREATE TABLE Comments (
@@ -45,8 +45,7 @@ CREATE TABLE Favourites(
 
 CREATE TABLE Category(
     id SERIAL PRIMARY KEY,
-    category TEXT,
-    post_id INTEGER REFERENCES post
+    name TEXT,
     );
 
 

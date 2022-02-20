@@ -4,12 +4,12 @@ import users
 from flask import session
 
 
-def add_post(title, content, price):
+def add_post(title, content, price, category_id):
     creator_id = session["user_id"]
     if creator_id == 0:
         return False
-    sql = "INSERT INTO Post (title,content,price,creator_id,sent_at) VALUES (:title, :content, :price, :creator_id, NOW())"
-    db.session.execute(sql, {"title":title,"content":content, "price":price, "creator_id":creator_id})
+    sql = "INSERT INTO Post (title,content,price,creator_id,sent_at, category_id) VALUES (:title, :content, :price, :creator_id, NOW(),:category_id)"
+    db.session.execute(sql, {"title":title,"content":content, "price":price, "creator_id":creator_id, "category_id":category_id})
     db.session.commit()
     return True
 
@@ -19,7 +19,13 @@ def list_posts():
     return result.fetchall()   
 
 def get_post_by_id(id):
-    sql = "SELECT P.title, P.content FROM Post P WHERE P.id=(:id);"
+    sql = "SELECT P.title, P.content, P.id FROM Post P WHERE P.id=(:id);"
+    result = db.session.execute(sql,{"id":id})
+    return result.fetchall()
+
+def get_post_by_creator_id():
+    id = session["user_id"]
+    sql = "SELECT P.title, P.content, P.id FROM Post P WHERE P.creator_id=(:id);"
     result = db.session.execute(sql,{"id":id})
     return result.fetchall()
 

@@ -1,8 +1,17 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+	<title>Kirjautuminen</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+</head>
 
 
 <div class="container">
@@ -14,25 +23,27 @@
     		
     		<form action="" method="POST">
     		    
-    		    <div class="form-group has-error">
+    		    <div class="form-group ">
     		        <label for="title">Otsikko <span class="require">*</span> </label>
     		        <input id="title" type="text" class="form-control" name="title" />
-    		        <span class="help-block">Field not entered!</span>
+
     		    </div>
     		    
     		    <div class="form-group">
     		        <label for="price">Hinta <span class="require">*</span></label>
     		        <input id="price" type="text" class="form-control" name="price" />
     		    </div>
-				<div class="dropdown">
-					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-					<span class="caret"></span></button>
-					<ul class="dropdown-menu">
-					  <li><a href="#">HTML</a></li>
-					  <li><a href="#">CSS</a></li>
-					  <li><a href="#">JavaScript</a></li>
-					</ul>
-				  </div> 
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+					  <label class="input-group-text" for="inputGroupSelect01">Kategoria</label>
+					</div>
+					<select class="custom-select" name="inputGroupSelect01" id="inputGroupSelect01">
+					  <option selected>Valitse...</option>
+					  <option value="1">Laskettelusukset</option>
+					  <option value="2">Lumilaudat</option>
+					  <option value="3">Varusteet</option>
+					</select>
+				  </div>
     		    <div class="form-group">
     		        <label for="content">Kuvaus</label>
     		        <textarea id="content" rows="5" class="form-control" name="content" ></textarea>
@@ -50,9 +61,12 @@
     		            Cancel
     		        </button>
     		    </div>
+				
     		    
     		</form>
+			<div class="text-center", style="padding-bottom: 20px;">{{message}}</div>
 		</div>
 		
 	</div>
 </div>
+

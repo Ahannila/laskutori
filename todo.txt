@@ -9,19 +9,40 @@
 - Ilmoitusta tehdessä lisätään kaikki ilmoituksen vaatimat tiedot eli
 	title, hinta, visible ja content muutetaan. [X]
 
--Ilmoitukset vierekkäin []
+-Ilmoitukset vierekkäin [x]
 
 suosikit sivu [X]
-suosikiksi lisääminen [X]
-Suosikeista poisto []
-Ei voi lisätä jos on jo suosikeissa []
+	suosikiksi lisääminen [X]
+	Suosikeista poisto []
+	Ei voi lisätä jos on jo suosikeissa []
 
 Hakutoiminto []
+	-Hakutoiminta toimii sinällään mutta ei näytä mitään.
 
-Mahdollisuus avata julkaisu []
+Mahdollisuus avata julkaisu [x]
 
 Mahdollisuus lisätä kuva []
 
-Mahdollisuus kommentoida []
+Mahdollisuus kommentoida [x]
+
+Admin käyttäjä []
+	mahd poistaa ilmoitus []
+
+Errorien käsittely []
+	Liian pitkä otsikko/viesti, heittää ilmoituksen	
+	eikä siirrä error sivulle. [x]
+
+	Väärä käyttäjätunnus heittää ilmoituksen eikä siirrä 
+	toiselle sivulle [x]
+
+Kategoriat []
+	tee taulukko
+	Kun lisätään postaus lisätään kategorian id
+	id lisätään myös kategoria taulukkoon
+	Näytä kategoria postauksessa?
+	kategoria sivu josta näke 
 
 
+Yhtenäistä kaikki html:ät saman näkösiksi ja tsekkaa riippuvuudet []
+
+Jos ei käyttäjää, näytä error navbarissa kun aukaiset linkin []
