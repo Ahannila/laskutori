@@ -1,20 +1,21 @@
 {% extends "layout.html"%}
 {% block content %}
-<form method="GET"></form>
 <div class="text-center"><h3>Kategoriat</h3></div> 
 <ul class="nav nav-tabs">
     <li class="nav-item">
       <a class="nav-link" href="/sukset">Laskettelusukset</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/laudat">Lumilaudat</a>
+      <a class="nav-link active " href="/laudat">Lumilaudat</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="/varusteet">Varusteet</a>
     </li>
   </ul>
 
-
+  {% for post in posts %}
+  <h1>{{post[0]}}</h1>
+  {% endfor %}
 
 
 

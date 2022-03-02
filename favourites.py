@@ -19,7 +19,7 @@ def show_favourites():
     user_id = session["user_id"]
     if user_id == 0:
         return False
-    sql = "SELECT P.title, P.content, F.post_id FROM Post P, Favourites F WHERE F.user_id=(:user_id) AND P.id=F.post_id ;"
+    sql = "SELECT P.title, P.content, F.post_id, U.username FROM Post P, Favourites F, users U WHERE F.user_id=(:user_id) AND P.id=F.post_id AND P.creator_id=U.id;"
     result = db.session.execute(sql, {"user_id":user_id})
     return result.fetchall()
 
@@ -34,4 +34,13 @@ def already_favourite(post_id):
     else:
         False
 
-    
+def del_favourite(id):
+    user_id = session["user_id"]
+    print(user_id, id)
+    sql = "DELETE FROM Favourites WHERE post_id=(:id) AND user_id=(:user_id)"
+    execute = db.session.execute(sql,{"user_id":user_id,"id":id})
+    res = db.session.commit()
+    if res:
+        return True
+    else:
+        False

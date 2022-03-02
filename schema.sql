@@ -45,7 +45,7 @@ CREATE TABLE Favourites(
 
 CREATE TABLE Category(
     id SERIAL PRIMARY KEY,
-    name TEXT,
+    name TEXT
     );
 
 

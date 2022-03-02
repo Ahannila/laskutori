@@ -25,10 +25,23 @@ def get_post_by_id(id):
 
 def get_post_by_creator_id():
     id = session["user_id"]
-    sql = "SELECT P.title, P.content, P.id FROM Post P WHERE P.creator_id=(:id);"
+    if id == 0:
+        return False
+    sql = "SELECT P.title, P.content, P.id, P.sent_at FROM Post P WHERE P.creator_id=(:id);"
     result = db.session.execute(sql,{"id":id})
     return result.fetchall()
 
-def remove_post():
-    sql = "DELETE FROM post WHERE creator_id VALUES (:creator_id)"
+def remove_post(id):
+    sql = "DELETE FROM post WHERE id=(:id)"
+    db.session.execute(sql,{"id":id})
+    result = db.session.commit()
+    if result:
+        return True
+    else:
+        return False
+
+def get_posts_by_category(category_id):
+    sql = "SELECT P.title FROM post P LEFT JOIN category C ON C.id = P.category_id WHERE C.id = (:id)  ORDER BY C.id;"
+    result = db.session.execute(sql,{"id":category_id})
+    return result.fetchall()
 

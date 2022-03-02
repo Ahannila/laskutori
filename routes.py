@@ -1,3 +1,4 @@
+from crypt import methods
 from app import app
 from flask import redirect, render_template, request, session
 import users
@@ -14,7 +15,6 @@ def index():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "GET":
-        print("Routes GET")
         return render_template("register.html")
     if request.method == "POST":
         print("routes POST")
@@ -70,10 +70,18 @@ def newpost():
         else: 
             return render_template("error.html")
 
+@app.route("/del_post", methods=["POST"])
+def del_post():
+    try:
+        id = request.form["post"]
+        posts.remove_post(id)
+        users_posts = posts.get_post_by_creator_id()
+        return render_template("userlistings.html", posts=users_posts)
+    except:
+        return render_template("error.html", error="Jotain meni pieleen poistossa")
+
 @app.route("/favourite", methods=["GET", "POST"])
 def favourite():
-
-
     if request.method == "GET":
         try:
             faves=favourites.show_favourites()
@@ -86,6 +94,17 @@ def favourite():
             return redirect("/")
         else:
             return render_template("error.html", error="Kohde on jo suosikeissasi")
+
+@app.route("/del_favourite", methods=["POST"])
+def del_favourite():
+    if request.method == "POST":
+        try:
+            id = request.form["fav_id"] 
+            favourites.del_favourite(id)
+            faves=favourites.show_favourites()
+            return render_template("favourite.html", favourites=faves)
+        except: 
+            return render_template("error.html", error="Poistossa tapahtui virhe")
 
 @app.route("/post", methods=["POST"])
 def post():
@@ -102,7 +121,9 @@ def comments():
         content = request.form["comment"]
         try: 
             comment.add_comment(post_id,content)
-            return render_template("post.html", message="Kommenttisi on nyt julkaistu")
+            post = posts.get_post_by_id(post_id)
+            comments = comment.get_comments(post_id)
+            return render_template("post.html", posts=post, comment=comments)
         except: 
             return render_template("error.html", error="tapahtui kommentoitaessa, oletko kirjautunut sisään?")
 
@@ -113,10 +134,10 @@ def categories():
 
 @app.route("/search")
 def query():
-        query = request.form["search"]
-        result = search.query_results(query)
-        print(result)
-        return render_template("search.html", result=result)
+    query = request.args["search"]
+    print(query)
+    result = search.query_results(query)
+    return render_template("search.html", result=result)
 
 @app.route("/userlistings")
 def user_listings():
@@ -125,3 +146,19 @@ def user_listings():
         return render_template("userlistings.html", posts=users_posts)
     except:
         return render_template("error.html", error="Kirjaudu sisään nähdäksesi julkaisusi")
+
+@app.route("/sukset")
+def sukset():
+    category_posts = posts.get_posts_by_category(1)
+    print(category_posts)
+    return render_template("kategoriat/sukset.html", posts=category_posts)
+
+@app.route("/laudat")
+def laudat():
+    category_posts = posts.get_posts_by_category(2)
+    return render_template("kategoriat/laudat.html", posts=category_posts)
+
+@app.route("/varusteet")
+def varusteet():
+    category_posts = posts.get_posts_by_category(3)
+    return render_template("kategoriat/varusteet.html", posts=category_posts)

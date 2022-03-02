@@ -12,12 +12,12 @@
         <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{fave[0]}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted text-truncate"><i>Ilmoittaja:  </i>{{fave[2]}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted text-truncate"><i>Ilmoittaja:  </i>{{fave[3]}}</h6>
           <p class="card-text text-truncate">{{fave[1]}}</p>
           <a href="#" class="card-link">Avaa isommaksi</a>
 
-          <form action="/favourite" method="POST">
-            <input type="hidden" name="post" value={{fave[0]}}>
+          <form action="/del_favourite" method="POST">
+            <input type="hidden" name="fav_id" value={{fave[2]}}>
             <input type="submit" value="Poista suosikeista">
         </form>
         
