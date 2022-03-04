@@ -11,6 +11,12 @@ def add_comment(id,content):
     return True
 
 def get_comments(id):
-    sql = "SELECT comment, user_id, sent_at FROM comments WHERE post_id=(:post_id)"
+    sql = "SELECT C.comment, C.user_id, C.sent_at, U.username FROM comments C, users U WHERE U.id=C.user_id AND post_id=(:post_id)"
     result = db.session.execute(sql,{"post_id":id})
     return result.fetchall()
+
+def del_comments(post_id):
+    sql = "DELETE FROM comments where post_id=(:post_id)"
+    db.session.execute(sql,{"post_id":post_id})
+    db.session.commit()
+    return True

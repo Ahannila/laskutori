@@ -16,7 +16,12 @@ def add_post(title, content, price, category_id):
 def list_posts():
     sql = "SELECT P.title, P.content, U.username, P.sent_at, P.price, P.id FROM Post P, users U WHERE P.creator_id=U.id ORDER BY P.sent_at"
     result = db.session.execute(sql)
-    return result.fetchall()   
+    return result.fetchall()  
+
+def get_posts_by_category(category_id):
+    sql = "SELECT P.title FROM post P LEFT JOIN category C ON C.id = P.category_id WHERE C.id = (:id)  ORDER BY C.id;"
+    result = db.session.execute(sql,{"id":category_id})
+    return result.fetchall() 
 
 def get_post_by_id(id):
     sql = "SELECT P.title, P.content, P.id FROM Post P WHERE P.id=(:id);"
@@ -40,8 +45,5 @@ def remove_post(id):
     else:
         return False
 
-def get_posts_by_category(category_id):
-    sql = "SELECT P.title FROM post P LEFT JOIN category C ON C.id = P.category_id WHERE C.id = (:id)  ORDER BY C.id;"
-    result = db.session.execute(sql,{"id":category_id})
-    return result.fetchall()
+
 

@@ -17,6 +17,7 @@ Julkaisu isompana
                 <textarea id="comment" cols="2" rows="2" class="form-control" name="comment" ></textarea>
             </div>
             <input type="hidden" name="id" value={{x[2]}}>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             
             <div class="d-flex align-items-center">
 
@@ -37,7 +38,7 @@ Julkaisu isompana
         <div class="media g-mb-30 media-comment">
             <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
               <div class="g-mb-15">
-                <h5 class="h5 g-color-gray-dark-v1 mb-0">{{x[1]}}</h5>
+                <h5 class="h5 g-color-gray-dark-v1 mb-0">{{x[3]}}</h5>
                 <span class="g-color-gray-dark-v4 g-font-size-12">{{x[2].strftime("%Y-%m-%d %H:%M:%S")}}</span>
               </div>
         

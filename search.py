@@ -3,7 +3,7 @@ from flask import session
 
 
 def query_results(query):
-    sql = "SELECT id, title ,content FROM post WHERE title LIKE :query"
+    sql = "SELECT P.title, P.content, U.username, P.sent_at, P.price, P.id FROM Post P, users U WHERE P.creator_id=U.id AND title LIKE :query"
     result = db.session.execute(sql, {"query":"%"+query+"%"})
     results = result.fetchall()
     print(results)

@@ -38,9 +38,15 @@ def del_favourite(id):
     user_id = session["user_id"]
     print(user_id, id)
     sql = "DELETE FROM Favourites WHERE post_id=(:id) AND user_id=(:user_id)"
-    execute = db.session.execute(sql,{"user_id":user_id,"id":id})
+    db.session.execute(sql,{"user_id":user_id,"id":id})
     res = db.session.commit()
     if res:
         return True
     else:
         False
+
+def del_favourite_when_deleting_post(id):
+    sql = "DELETE FROM Favourites WHERE post_id=(:id)"
+    db.session.execute(sql,{"id":id})
+    db.session.commit()
+    return True

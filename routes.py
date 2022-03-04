@@ -47,6 +47,14 @@ def newpost():
     if request.method == "GET":
         return render_template("newpost.html")
     if request.method == "POST":
+
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+
+        token = request.form["csrf_token"]
+        print(token)
+        print(session["csrf_token"])
+
         title = request.form["title"]
         if len(title) > 20:
             return render_template("newpost.html", message="Otsikko on liian pitkä")
@@ -73,7 +81,11 @@ def newpost():
 @app.route("/del_post", methods=["POST"])
 def del_post():
     try:
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         id = request.form["post"]
+        favourites.del_favourite_when_deleting_post(id)
+        comment.del_comments(id)
         posts.remove_post(id)
         users_posts = posts.get_post_by_creator_id()
         return render_template("userlistings.html", posts=users_posts)
@@ -89,6 +101,8 @@ def favourite():
         except:
             return render_template("error.html", error="Kirjaudu sisään nähdäksesi suosikkisi")
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         post = request.form["post"]
         if favourites.add_favourite(post):
             return redirect("/")
@@ -98,6 +112,8 @@ def favourite():
 @app.route("/del_favourite", methods=["POST"])
 def del_favourite():
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         try:
             id = request.form["fav_id"] 
             favourites.del_favourite(id)
@@ -117,6 +133,8 @@ def post():
 @app.route("/comment", methods=["GET", "POST"])
 def comments():
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         post_id = request.form["id"]
         content = request.form["comment"]
         try: 

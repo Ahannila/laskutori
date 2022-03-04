@@ -18,13 +18,12 @@
 
           <form action="/del_favourite" method="POST">
             <input type="hidden" name="fav_id" value={{fave[2]}}>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <input type="submit" value="Poista suosikeista">
         </form>
         
         </div>
-        <div class="card-footer">
-          <small class="text-muted">{{fave[0]}}</small>
-        </div>
+  
       </div>
     </div>
     {% endfor %}

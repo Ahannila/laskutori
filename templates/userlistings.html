@@ -16,6 +16,7 @@
 
           <form action="/del_post" method="POST">
             <input type="hidden" name="post" value={{post[2]}}>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <input type="submit" value="Poista Julkaisu">
         </form>
         
