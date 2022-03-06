@@ -17,7 +17,6 @@ def register():
     if request.method == "GET":
         return render_template("register.html")
     if request.method == "POST":
-        print("routes POST")
         username = request.form["username"]
         password = request.form["password"]
         if users.register(username, password):
@@ -51,9 +50,7 @@ def newpost():
         if session["csrf_token"] != request.form["csrf_token"]:
             abort(403)
 
-        token = request.form["csrf_token"]
-        print(token)
-        print(session["csrf_token"])
+     
 
         title = request.form["title"]
         if len(title) > 20:
@@ -153,7 +150,6 @@ def categories():
 @app.route("/search")
 def query():
     query = request.args["search"]
-    print(query)
     result = search.query_results(query)
     return render_template("search.html", result=result)
 
@@ -168,7 +164,6 @@ def user_listings():
 @app.route("/sukset")
 def sukset():
     category_posts = posts.get_posts_by_category(1)
-    print(category_posts)
     return render_template("kategoriat/sukset.html", posts=category_posts)
 
 @app.route("/laudat")
