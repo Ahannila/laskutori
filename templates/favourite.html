@@ -14,7 +14,10 @@
           <h5 class="card-title">{{fave[0]}}</h5>
           <h6 class="card-subtitle mb-2 text-muted text-truncate"><i>Ilmoittaja:  </i>{{fave[3]}}</h6>
           <p class="card-text text-truncate">{{fave[1]}}</p>
-          <a href="#" class="card-link">Avaa isommaksi</a>
+          <form action="/post" method="POST">
+            <input type="hidden" name="id" value={{fave[4]}}>
+            <input type="submit" value="Avaa isommaksi">
+        </form>
 
           <form action="/del_favourite" method="POST">
             <input type="hidden" name="fav_id" value={{fave[2]}}>

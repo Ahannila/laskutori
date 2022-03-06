@@ -19,7 +19,7 @@ def show_favourites():
     user_id = session["user_id"]
     if user_id == 0:
         return False
-    sql = "SELECT P.title, P.content, F.post_id, U.username FROM Post P, Favourites F, users U WHERE F.user_id=(:user_id) AND P.id=F.post_id AND P.creator_id=U.id;"
+    sql = "SELECT P.title, P.content, F.post_id, U.username, P.id FROM Post P, Favourites F, users U WHERE F.user_id=(:user_id) AND P.id=F.post_id AND P.creator_id=U.id;"
     result = db.session.execute(sql, {"user_id":user_id})
     return result.fetchall()
 
