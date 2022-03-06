@@ -17,11 +17,7 @@ def login(username, password):
     sql = "SELECT id, password FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
-    if username == "admin" and password=="admin":
-        session["admin_id"] = 1
-        session["csrf_token"] = secrets.token_hex(16)
-        return True
-    elif not user:
+    if not user:
         return False
     else:
         if check_password_hash(user.password, password):

@@ -2,7 +2,7 @@
 {% block content %}
 <div class="text-center"><h3>Täällä ovat julkaisusi</h3></div> 
 
-{% if session.user_id or session.admin_id%}
+{% if session.user_id %}
 <div class="row row-cols-2 row-cols-2">  
   {% for post in posts %}
     <div class="col mb-4">
@@ -16,7 +16,7 @@
             <input type="hidden" name="id" value={{post[5]}}>
             <input type="submit" value="Avaa isommaksi">
         </form>
-        
+
           <form action="/del_post" method="POST">
             <input type="hidden" name="post" value={{post[2]}}>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
