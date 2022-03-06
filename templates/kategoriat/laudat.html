@@ -13,9 +13,35 @@
     </li>
   </ul>
 
-  {% for post in posts %}
-  <h1>{{post[0]}}</h1>
-  {% endfor %}
+  <div class="row row-cols-1 row-cols-md-3"> 
+    {% for post in posts%} 
+    <div class="col mb-4">
+      <div class="card h-100" style="width: 21rem; left: 14px; ">
+        <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{post[0]}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted text-truncate"><i>Ilmoittaja:  </i>{{post[2]}}</h6>
+          <p class="card-text text-truncate">{{post[1]}}</p>
+
+          <form action="/post" method="POST">
+            <input type="hidden" name="id" value={{post[5]}}>
+            <input type="submit" value="Avaa isommaksi">
+        </form>
+
+          <form action="/favourite" method="POST">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <input type="hidden" name="post" value={{post[5]}}>
+            <input type="submit" value="Lisää suosikiksi">
+        </form>
+        
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">{{post[3]}}</small>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 
 
 

@@ -19,7 +19,7 @@ def list_posts():
     return result.fetchall()  
 
 def get_posts_by_category(category_id):
-    sql = "SELECT P.title FROM post P LEFT JOIN category C ON C.id = P.category_id WHERE C.id = (:id)  ORDER BY C.id;"
+    sql = "SELECT P.title, P.content, P.sent_at, P.price, P.id FROM post P LEFT JOIN category C ON C.id = P.category_id WHERE C.id = (:id)  ORDER BY C.id;"
     result = db.session.execute(sql,{"id":category_id})
     return result.fetchall() 
 

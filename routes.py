@@ -159,6 +159,10 @@ def query():
 
 @app.route("/userlistings")
 def user_listings():
+    if session["admin_id"]:
+        all_posts = posts.list_posts()
+        return render_template("userlistings.html", posts=all_posts)
+
     try:
         users_posts = posts.get_post_by_creator_id()
         return render_template("userlistings.html", posts=users_posts)

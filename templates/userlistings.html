@@ -2,7 +2,7 @@
 {% block content %}
 <div class="text-center"><h3>Täällä ovat julkaisusi</h3></div> 
 
-{% if session.user_id %}
+{% if session.user_id or session.admin_id%}
 <div class="row row-cols-2 row-cols-2">  
   {% for post in posts %}
     <div class="col mb-4">
@@ -12,8 +12,11 @@
           <h5 class="card-title">{{post[0]}}</h5>
           <h6 class="card-subtitle mb-2 text-muted text-truncate"><i>julkaisija:  </i>Sinä</h6>
           <p class="card-text text-truncate">{{post[1]}}</p>
-          <a href="#" class="card-link">Avaa isommaksi</a>
-
+          <form action="/post" method="POST">
+            <input type="hidden" name="id" value={{post[5]}}>
+            <input type="submit" value="Avaa isommaksi">
+        </form>
+        
           <form action="/del_post" method="POST">
             <input type="hidden" name="post" value={{post[2]}}>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
@@ -32,3 +35,5 @@
   Kirjaudu sisään nähdäksesi julkaisusi
   {% endif %}
 {% endblock %}
+
+
