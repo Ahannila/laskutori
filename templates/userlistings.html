@@ -13,7 +13,7 @@
           <h6 class="card-subtitle mb-2 text-muted text-truncate"><i>julkaisija:  </i>Sinä</h6>
           <p class="card-text text-truncate">{{post[1]}}</p>
           <form action="/post" method="POST">
-            <input type="hidden" name="id" value={{post[5]}}>
+            <input type="hidden" name="id" value={{post[2]}}>
             <input type="submit" value="Avaa isommaksi">
         </form>
 
@@ -22,6 +22,10 @@
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <input type="submit" value="Poista Julkaisu">
         </form>
+
+        <form action="/add_photo" method="GET">
+          <input type="submit" value="Lisää julkaisullesi kuva">
+      </form>
         
         </div>
         <div class="card-footer">

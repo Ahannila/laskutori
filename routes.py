@@ -1,11 +1,14 @@
 from crypt import methods
+from multiprocessing import reduction
 from app import app
-from flask import redirect, render_template, request, session
+from flask import make_response, redirect, render_template, request, session
 import users
 import posts
 import favourites
 import search
-import comment
+import comment, photo
+
+
 
 @app.route("/")
 def index():
@@ -141,6 +144,24 @@ def comments():
             return render_template("post.html", posts=post, comment=comments)
         except: 
             return render_template("error.html", error="tapahtui kommentoitaessa, oletko kirjautunut sisään?")
+
+
+@app.route("/add_photo", methods=["GET"])
+def add_photo():
+    return render_template("add_photo.html")
+
+@app.route("/send", methods=["POST"])
+def send():
+    if request.method == "GET":
+        return render_template("add_photo.html")
+    if request.method == "POST":
+        file = request.files["file"]
+        name = file.filename
+        try:
+            photo.upload_photo(file,name)
+            return render_template("/")
+        except:
+            return render_template("error.html", error=photo.upload_photo(file,name))
 
 
 @app.route("/categories", methods=["GET", "POST"])

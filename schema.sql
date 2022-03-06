@@ -33,8 +33,8 @@ CREATE TABLE Admins(
 
 CREATE TABLE photos (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users,
-    kuvat TEXT
+    name TEXT,
+    data BYTEA
 );
 
 CREATE TABLE Favourites(
